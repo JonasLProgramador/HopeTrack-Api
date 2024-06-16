@@ -65,7 +65,7 @@ export class DonationDao {
     }
   }
 
-  async updateDonator(
+  async updateDonation(
     id,
     amount,
     donation_date,

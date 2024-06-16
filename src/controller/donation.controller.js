@@ -15,7 +15,7 @@ export const createDonation = [
     }
     try {
       const {
-         amount,
+        amount,
         donation_date,
         payment_receipt_link,
         donator_id 
@@ -46,8 +46,8 @@ export const showDonations = [
             donator_id 
           res.status(500).json({ message: error.message });
         }
-      }
-];
+      } amount,
+      donation_date,
 
 export const showDonation = [
   param('id').isInt().withMessage('ID must be an integer'),

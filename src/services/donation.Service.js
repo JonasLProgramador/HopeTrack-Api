@@ -1,13 +1,24 @@
-import { DonatorDao } from "../DAO/Donator.Dao.js";
+import { DonationDao } from "../DAO/Donation.Dao.js";
+
 
 export class DonatorService {
   constructor() {
-     this.DonatorDao = new DonatorDao();
+     this.DonationDao = new DonationDao();
   }
 
-  async create(name,email) {
+  async create( 
+    amount,
+    donation_date,
+    payment_receipt_link,
+    donator_id 
+) {
     try {
-        const created =  await this.DonatorDao.createDonator(name,email);
+        const created =  await this.DonationDao.createDonation( 
+            amount,
+            donation_date,
+            payment_receipt_link,
+            donator_id 
+        );
         return created;
     } catch (error) {
         throw error
@@ -15,7 +26,7 @@ export class DonatorService {
   };
   async showAll() {
     try {
-        const result =  await this.DonatorDao.showAllDonators();
+        const result =  await this.DonationDao.showAllDonations();
         return result;
     } catch (error) {
         throw error;
@@ -24,15 +35,25 @@ export class DonatorService {
 
   async showById(id) {
     try {
-        const result =  await this.DonatorDao.showDonator(id);
+        const result =  await this.DonationDao.showDonation(id)
         return result;
     } catch (error) {
         throw error;
     }
   };
-  async update(id,name,email) {
+  async update(
+    id, 
+    amount,
+    donation_date,
+    payment_receipt_link,
+    ){
     try {
-        const result =  await this.DonatorDao.updateDonator(id,name,email);
+        const result =  await this.DonationDao.updateDonation(
+            id,
+            amount,
+            donation_date,
+            payment_receipt_link,
+            );
         return result;
     } catch (error) {
         throw error;
@@ -40,7 +61,7 @@ export class DonatorService {
   };
   async delete(id) {
     try {
-        const result =  await this.DonatorDao.deleteDonator(id);
+        const result =  await this.DonationDao.deleteDonation(id);
         return result;
     } catch (error) {
         throw error;
