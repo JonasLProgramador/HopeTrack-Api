@@ -18,7 +18,7 @@ export class CharityDao {
       }
 
       const [result] = await connection.query(
-        "INSERT INTO Donation (name, description, identification) VALUES (?, ?, ? ,?)",
+        "INSERT INTO Charity (name, description, identification) VALUES (?, ?, ? )",
         [name, description, identification]
       );
       const lastInsertId = result.insertId;
@@ -62,14 +62,14 @@ export class CharityDao {
 
   async updateCharity(id, name, description, identification) {
     try {
-      if (!id | !name || !description || !identification) {
+      if (!id || !name || !description || !identification) {
         throw new Error(
           "ID, name and  description, identification, are required"
         );
       }
 
       const [existingCharity] = await connection.query(
-        "SELECT * FROM Donation WHERE identification = ? AND id != ?",
+        "SELECT * FROM Charity WHERE identification = ? AND id != ?",
         [identification, id]
       );
       if (existingCharity.length > 0) {
@@ -78,8 +78,11 @@ export class CharityDao {
 
       const [result] = await connection.query(
         "UPDATE Charity SET name = ?, description = ?,identification = ? WHERE id = ?",
-        [name, description, identification]
+        [name, description, identification,id]
       );
+      if(result.affectedRows < 1 ){
+        throw new Error("Not affective updated!,because not have changes");
+      }
       const [updatedCharity] = await connection.query(
         "SELECT * FROM Charity WHERE id = ?",
         [id]
@@ -101,7 +104,7 @@ export class CharityDao {
         [id]
       );
       if (deletedCharity.affectedRows < 1) {
-        throw new Error("Donation not found");
+        throw new Error("Charity not found");
       }
       return deletedCharity[0];
     } catch (error) {
