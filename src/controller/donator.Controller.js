@@ -63,7 +63,7 @@ export const updateDonator = [
       const { id } = req.params;
       const { name, email } = req.body;
       const donator = await instanceUserService.update(id, name, email);
-      res.status(200).json(donator);
+      res.status(200).json( {message:'updated sucessful!',donator});
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

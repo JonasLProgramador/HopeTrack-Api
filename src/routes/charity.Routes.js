@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCharity, deleteCharity, showCharities, showCharity, updateCharity } from "../controller/charity.Controller";
+import { createCharity, deleteCharity, showCharities, showCharity, updateCharity } from "../controller/charity.Controller.js";
 
 const  charityRouter = Router();
 

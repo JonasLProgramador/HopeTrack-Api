@@ -4,7 +4,7 @@ import { body, param, validationResult } from 'express-validator';
 const instanceDonationService = new DonationService()
 
 export const createDonation = [
-  body('amout').isFloat().withMessage('amount must be a float number').notEmpty().withMessage('amount is required'),
+  body('amount').isFloat().withMessage('amount must be a float number').notEmpty().withMessage('amount is required'),
   body('donation_date').isDate().withMessage('The data must be a valid data time'),
   body('payment_receipt_link').isURL().withMessage('The payment receipt link must be a valid link').notEmpty(),
   body('donator_id').isInt().notEmpty().withMessage('The id is required'),
@@ -68,7 +68,7 @@ export const showDonation = [
 
 export const updateDonation = [
   param('id').isInt().withMessage('ID must be an integer'),
-  body('amout').optional().isFloat().withMessage('amount must be a float number').notEmpty().withMessage('amount is required'),
+  body('amount').optional().isFloat().withMessage('amount must be a float number').notEmpty().withMessage('amount is required'),
   body('donation_date').optional().isDate().withMessage('The data must be a valid data time'),
   body('payment_receipt_link').optional().isURL().withMessage('The payment receipt link must be a valid link'),
   async (req, res) => {
@@ -82,10 +82,10 @@ export const updateDonation = [
       const { 
         amount,
         donation_date,
-        payment_receipt_link,
+        payment_receipt_link
      } = req.body;
       const donation = await instanceDonationService.update(
-        id, 
+        id,
         amount,
         donation_date,
         payment_receipt_link,

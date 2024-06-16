@@ -15,18 +15,18 @@ export class DonationDao {
       }
 
       const [existingDonation] = await connection.query(
-        "SELECT * FROM Donator WHERE payment_receipt_link = ?",
+        "SELECT * FROM Donation WHERE payment_receipt_link = ?",
         [payment_receipt_link]
       );
       if (existingDonation.length > 0) {
         throw new Error(" already donated!,repeated donation");
       }
-
+    
       const [result] = await connection.query(
         "INSERT INTO Donation (amount, donation_date,payment_receipt_link,donator_id) VALUES (?, ?, ? ,?)",
         [amount, donation_date, payment_receipt_link, donator_id]
       );
-      const lastInsertId = result.insertId;
+      const lastInsertId = result.insertId; 
       const [created] = await connection.query(
         "SELECT * FROM Donation WHERE id = ?",
         [lastInsertId]
@@ -73,7 +73,7 @@ export class DonationDao {
   ) {
     try {
       if (
-        !id | !amount ||
+        !id || !amount ||
         !donation_date ||
         !payment_receipt_link 
       ) {
@@ -91,7 +91,7 @@ export class DonationDao {
       }
 
       const [result] = await connection.query(
-        "UPDATE Donator SET amount = ?, donation_date = ?,payment_receipt_link = ? WHERE id = ?",
+        "UPDATE Donation SET amount = ?, donation_date = ?,payment_receipt_link = ? WHERE id = ?",
         [
             amount,
             donation_date,
@@ -99,6 +99,9 @@ export class DonationDao {
             id
         ]
       );
+      if(result.affectedRows < 1){
+        throw new Error('Not donation found with the provided ID')
+      }
       const [updatedDonator] = await connection.query(
         "SELECT * FROM Donation WHERE id = ?",
         [id]

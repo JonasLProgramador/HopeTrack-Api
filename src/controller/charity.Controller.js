@@ -1,6 +1,6 @@
 
 import { body, param, validationResult } from 'express-validator';
-import { CharityService } from '../services/charity.Service';
+import { CharityService } from '../services/charity.Service.js';
 
 const instanceCharityService = new CharityService();
 

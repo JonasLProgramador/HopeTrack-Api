@@ -42,7 +42,7 @@ export class DonationService {
     }
   };
   async update(
-    id, 
+      id,
     amount,
     donation_date,
     payment_receipt_link,
