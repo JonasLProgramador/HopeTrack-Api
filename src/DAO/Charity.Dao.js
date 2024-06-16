@@ -60,7 +60,7 @@ export class CharityDao {
     }
   }
 
-  async updateDonation(id, name, description, identification) {
+  async updateCharity(id, name, description, identification) {
     try {
       if (!id | !name || !description || !identification) {
         throw new Error(
