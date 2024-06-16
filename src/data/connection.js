@@ -7,6 +7,8 @@ export const connection = await mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database:process.env.DB_NAME,
+}).catch(error => {
+  throw new Error(error)
 })
 
 export const testConnection = async () => {
@@ -14,6 +16,6 @@ export const testConnection = async () => {
       await connection.ping();
       console.log('Connection establish successful to database')
     } catch (error) {
-      throw new Error('Not possible establish conection with database because'),error 
+      throw new Error('Not possible establish conection with database because')
     }
   };
