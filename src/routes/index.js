@@ -1,9 +1,9 @@
 import {Router} from 'express';
-import { routesExample } from './user.routes.js';
+import { donatorRouter } from './donator.routes.js';
 
 const router = Router()
 
-router.use('/rota',routesExample);
+router.use('/donator',donatorRouter);
 
 
 
