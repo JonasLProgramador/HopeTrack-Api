@@ -70,14 +70,12 @@ export class DonationDao {
     amount,
     donation_date,
     payment_receipt_link,
-    donator_id
   ) {
     try {
       if (
         !id | !amount ||
         !donation_date ||
-        !payment_receipt_link ||
-        !donator_id
+        !payment_receipt_link 
       ) {
         throw new Error(
           "ID, amount and  donation date, payment receipt link, donator id  are required"
@@ -93,12 +91,12 @@ export class DonationDao {
       }
 
       const [result] = await connection.query(
-        "UPDATE Donator SET name = ?, email = ? WHERE id = ?",
+        "UPDATE Donator SET amount = ?, donation_date = ?,payment_receipt_link = ? WHERE id = ?",
         [
             amount,
             donation_date,
             payment_receipt_link,
-            donator_id
+            id
         ]
       );
       const [updatedDonator] = await connection.query(
@@ -117,14 +115,14 @@ export class DonationDao {
         throw new Error("ID is required");
       }
 
-      const [deletedDonator] = await connection.query(
+      const [deletedDonation] = await connection.query(
         "DELETE FROM Donation WHERE id = ?",
         [id]
       );
-      if (deletedDonator.affectedRows < 1) {
+      if (deletedDonation.affectedRows < 1) {
         throw new Error("Donation not found");
       }
-      return deletedDonator[0];
+      return deletedDonation[0];
     } catch (error) {
       throw error;
     }
