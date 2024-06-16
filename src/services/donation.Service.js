@@ -1,7 +1,7 @@
 import { DonationDao } from "../DAO/Donation.Dao.js";
 
 
-export class DonatorService {
+export class DonationService {
   constructor() {
      this.DonationDao = new DonationDao();
   }

@@ -1,7 +1,7 @@
-import { DonatorService } from "../services/donator.Service.js";
+import { DonationService } from "../services/donation.Service.js";
 import { body, param, validationResult } from 'express-validator';
 
-const instanceDonationService = 
+const instanceDonationService = new DonationService()
 
 export const createDonation = [
   body('amout').isFloat().withMessage('amount must be a float number').notEmpty().withMessage('amount is required'),
@@ -20,7 +20,7 @@ export const createDonation = [
         payment_receipt_link,
         donator_id 
        } = req.body;
-      const createdDonation = await instanceUserService.create(
+      const createdDonation = await instanceDonationService.create(
         amount,
         donation_date,
         payment_receipt_link,
@@ -42,12 +42,11 @@ export const showDonations = [
         try {
           const donations = await instanceDonationService.showAll();
           res.status(200).json(donations);
-        } catch (error) {receipt_link,
-            donator_id 
+        } catch (error) {
           res.status(500).json({ message: error.message });
         }
-      } amount,
-      donation_date,
+      } 
+    ];
 
 export const showDonation = [
   param('id').isInt().withMessage('ID must be an integer'),
@@ -59,7 +58,7 @@ export const showDonation = [
 
     try {
       const { id } = req.params;
-      const donation = await instanceUserService.showById(id);
+      const donation = await instanceDonationService.showById(id);
       res.status(200).json(donation);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -85,7 +84,7 @@ export const updateDonation = [
         donation_date,
         payment_receipt_link,
      } = req.body;
-      const donation = await instanceUserService.update(
+      const donation = await instanceDonationService.update(
         id, 
         amount,
         donation_date,
@@ -108,7 +107,7 @@ export const deleteDonation = [
 
     try {
       const { id } = req.params;
-      await instanceUserService.delete(id);
+      await instanceDonationService.delete(id);
       res.status(200).json({ message: 'Donation deleted successfully' });
     } catch (error) {
       res.status(500).json({ message: error.message });
