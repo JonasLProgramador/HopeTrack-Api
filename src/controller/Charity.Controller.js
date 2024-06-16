@@ -1,7 +1,8 @@
 
 import { body, param, validationResult } from 'express-validator';
+import { CharityService } from '../services/charity.Service';
 
-const instanceCharityService = 
+const instanceCharityService = new CharityService();
 
 export const createCharity = [
   body('name').isString().withMessage('Name must be a valid String!')

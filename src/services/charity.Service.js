@@ -2,7 +2,7 @@ import { CharityDao } from "../DAO/Charity.Dao";
 
 
 
-export class DonationService {
+export class CharityService {
   constructor() {
      this.CharityDao = new CharityDao()
   }
