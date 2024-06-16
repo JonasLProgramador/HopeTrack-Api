@@ -129,7 +129,7 @@ FOREIGN KEY  (donator_id) REFERENCES Donator(id) ON DELETE CASCADE ON UPDATE CAS
 FOREIGN KEY (Charity_id) REFERENCES Charity(id) ON DELETE CASCADE ON UPDATE CASCADE 
 )
     </pre>
-    <p>Alternativamente, você pode encontrar o script <a href="link_to_script.sql">aqui</a>.</p>
+    <p>Alternativamente, você pode encontrar o script <a href="https://github.com/JonasLProgramador/HopeTrack-Database.git">aqui</a>.</p>
   </section>
 
   <section id="rotas">
